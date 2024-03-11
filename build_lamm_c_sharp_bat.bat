@@ -1,9 +1,6 @@
 @echo off
 
-rem ONLY EDIT THIS ROW (Name of your catalog)
 set "project=library_architecture_mvvm_modify_c_sharp"
-rem ONLY EDIT THIS ROW (Name of your catalog)
-
 rd /s /q build
 rd /s /q %systemdrive%\$Recycle.bin
 Xcopy %project%\* build\ /S /E
