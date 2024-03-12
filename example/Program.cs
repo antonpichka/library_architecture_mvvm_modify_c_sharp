@@ -1,13 +1,50 @@
 ﻿using System;
 using library_architecture_mvvm_modify_c_sharp;
 
-class Program
+namespace Program;
+
+public enum EnumDataForProgram {
+    IsLoading,
+    Exception,
+    Success
+}
+
+public class DataForProgram(bool isLoading) : BaseDataForNamed<EnumDataForProgram>(isLoading)
+{
+    public override EnumDataForProgram GetEnumDataForNamed()
+    {
+        if(isLoading) {
+            return EnumDataForProgram.IsLoading;
+        }
+        if(exceptionController.IsWhereNotEqualsNullParameterException()) {
+            return EnumDataForProgram.Exception;
+        }
+        return EnumDataForProgram.Success;
+    }
+}
+
+public class Program
 {
     static void Main(string[] args)
     {
-        Utility.DebugPrint("Hello suka World");
-        Utility.DebugPrintException("Hello suka World");
-        Utility.DebugPrint("Hello suka World");
-        Utility.DebugPrint($"{EnumGuilty.Device}");
+        var defaultStreamWState = new DefaultStreamWState<DataForProgram,EnumDataForProgram>(new DataForProgram(true));
+        switch(defaultStreamWState.GetDataForNamed().GetEnumDataForNamed()) {
+            case EnumDataForProgram.IsLoading:
+                Utility.DebugPrint("IsLoading");
+                break;
+            case EnumDataForProgram.Exception:
+                Utility.DebugPrint("Exception");
+                break;
+            case EnumDataForProgram.Success:
+                Utility.DebugPrint("Success");
+                break;
+            default:
+                break;    
+        }
+        defaultStreamWState.GetDataForNamed().isLoading = false;
+        defaultStreamWState.ListenStreamDataForNamed((DataForProgram dataForProgram) => {
+            Utility.DebugPrint($"Event: {dataForProgram.isLoading}");
+        });
+        defaultStreamWState.NotifyStreamDataForNamed();
     }
 }
