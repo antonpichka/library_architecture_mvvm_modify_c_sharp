@@ -11,7 +11,7 @@
     0.0.1:
     - Release
     </releaseNotes>
-    <copyright>@2024 Anton Pichka</copyright>
+    <copyright>"Copyright ©  2024"</copyright>
     <dependencies>
       <dependency id="SomeOtherLibrary" version="1.0" />
     </dependencies>

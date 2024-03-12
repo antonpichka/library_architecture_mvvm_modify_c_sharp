@@ -5,11 +5,6 @@ public static class Utility
     public static void DebugPrint(string text)
     {
         Console.WriteLine(text);
-        if(Console.ForegroundColor == ConsoleColor.White ||
-           Console.ForegroundColor == ConsoleColor.Black) 
-        {
-            return;
-        }
         Console.ResetColor();
     }
 

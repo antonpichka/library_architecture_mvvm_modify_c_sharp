@@ -1,4 +1,4 @@
-using library_architecture_mvvm_modify_c_sharp;
+namespace library_architecture_mvvm_modify_c_sharp;
 
 public abstract class BaseException : Exception
 {
