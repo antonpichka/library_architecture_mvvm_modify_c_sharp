@@ -1,6 +1,6 @@
 namespace library_architecture_mvvm_modify_c_sharp;
 
-public class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWState<T,Y> where Y : Enum where T : BaseDataForNamed<Y>
+public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWState<T,Y> where Y : Enum where T : BaseDataForNamed<Y>
 {
     private readonly T dataForNamed = dataForNamed;
     private bool isDispose = false;
