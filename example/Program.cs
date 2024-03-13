@@ -41,10 +41,10 @@ public class Program
             default:
                 break;    
         }
-        defaultStreamWState.GetDataForNamed().isLoading = false;
         defaultStreamWState.ListenStreamDataForNamed((DataForProgram dataForProgram) => {
             Utility.DebugPrint($"Event: {dataForProgram.isLoading}");
         });
+        defaultStreamWState.GetDataForNamed().isLoading = false;
         defaultStreamWState.NotifyStreamDataForNamed();
     }
 }
