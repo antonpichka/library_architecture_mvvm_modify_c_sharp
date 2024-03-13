@@ -17,4 +17,4 @@
 ## Template For LAMM
 
 - How should I create projects on this architecture? (Github Template)
-- - [template_for_lamm](https://github.com/antonpichka/template_for_lamm_c_sharp)
+- - [template_for_lamm_c_sharp](https://github.com/antonpichka/template_for_lamm_c_sharp)
