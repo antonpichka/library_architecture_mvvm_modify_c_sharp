@@ -4,6 +4,6 @@ public abstract class BaseNamedStreamWState<T,Y> : IDispose where Y : Enum where
 {
     public virtual void Dispose() {}
     public abstract T GetDataForNamed();
-    public abstract void ListenStreamDataForNamed(Action<T> callback);
+    public abstract void ListenStreamDataForNamedFromCallback(Action<T> callback);
     public abstract void NotifyStreamDataForNamed();
 }

@@ -21,7 +21,7 @@ public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWS
         return dataForNamed;
     }
 
-    public override void ListenStreamDataForNamed(Action<T> callback)
+    public override void ListenStreamDataForNamedFromCallback(Action<T> callback)
     {
         if(isDispose) 
         {
