@@ -63,7 +63,15 @@ public sealed class TempCacheService
 
     public void ListenStreamFromKeyTempCacheAndCallbackParameterOne(string keyTempCache, Action<dynamic> callback)
     {
-        tempCacheWListAction[keyTempCache]?.Add(callback);
+        if(!tempCacheWListAction.TryGetValue(keyTempCache, out List<Action<dynamic>>? listAction)) 
+        {
+            listAction = ([]);
+            tempCacheWListAction[keyTempCache] = listAction;
+            tempCacheWListAction[keyTempCache].Add(callback);
+            return;
+        }
+
+        listAction.Add(callback);
     }
 
     public void UpdateFromKeyTempCacheAndValueParameterTempCache(string keyTempCache, dynamic value) 

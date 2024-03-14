@@ -15,7 +15,7 @@ public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWS
         isDispose = true;
         callback = null;
     }
-
+    
     public override T GetDataForNamed()
     {
         return dataForNamed;
@@ -25,11 +25,11 @@ public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWS
     {
         if(isDispose) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamed","Already disposed of");
+            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Already disposed of");
         }
         if(this.callback != null) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamed","Duplicate");
+            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Duplicate");
         }
         this.callback = callback;
     }
