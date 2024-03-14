@@ -41,7 +41,7 @@ public class Program
             default:
                 break;    
         }
-        defaultStreamWState.ListenStreamDataForNamed((DataForProgram dataForProgram) => {
+        defaultStreamWState.ListenStreamDataForNamedFromCallback((DataForProgram dataForProgram) => {
             Utility.DebugPrint($"Event: {dataForProgram.isLoading}");
         });
         defaultStreamWState.GetDataForNamed().isLoading = false;
