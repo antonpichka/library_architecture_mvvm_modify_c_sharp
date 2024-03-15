@@ -11,6 +11,6 @@ public class Doubles(double field) : BaseModel($"{field}")
 
     public override string ToString()
     {
-        return $"Doubles(field: {field}";
+        return $"Doubles(field: {field})";
     }
 }

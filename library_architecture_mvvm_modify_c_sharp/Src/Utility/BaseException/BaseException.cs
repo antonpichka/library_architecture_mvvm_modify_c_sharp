@@ -8,7 +8,7 @@ public abstract class BaseException : Exception
     { 
         this.key = key;
         Utility.DebugPrintException("\n===start_to_trace_exception===\n");
-        Utility.DebugPrintException($"WhereHappenedException(Class) --> {thisClass.GetType}\n NameException(Class) --> {exceptionClass}\n toString() --> {ToString()}");
+        Utility.DebugPrintException($"WhereHappenedException(Class) --> {thisClass.GetType}\n NameException(Class) --> {exceptionClass}\n ToString() --> {ToString()}");
         Utility.DebugPrintException("\n===end_to_trace_exception===\n");
     }
 }

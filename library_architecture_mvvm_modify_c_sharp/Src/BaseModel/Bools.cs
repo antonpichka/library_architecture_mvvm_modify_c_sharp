@@ -11,6 +11,6 @@ public class Bools(bool isField) : BaseModel($"{isField}")
 
     public override string ToString()
     {
-        return $"Bools(isField: {isField}";
+        return $"Bools(isField: {isField})";
     }
 }

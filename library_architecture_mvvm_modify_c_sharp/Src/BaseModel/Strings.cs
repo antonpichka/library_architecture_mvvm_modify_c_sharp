@@ -11,6 +11,6 @@ public class Strings(string field) : BaseModel(field)
 
     public override string ToString()
     {
-        return $"Strings(field: {field}";
+        return $"Strings(field: {field})";
     }
 }

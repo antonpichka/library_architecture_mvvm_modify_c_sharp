@@ -25,11 +25,11 @@ public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWS
     {
         if(isDispose) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Already disposed of");
+            throw new LocalException(this,EnumGuilty.developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Already disposed of");
         }
         if(this.callback != null) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Duplicate");
+            throw new LocalException(this,EnumGuilty.developer,"DefaultStreamWStateQQListenStreamDataForNamedFromCallback","Duplicate");
         }
         this.callback = callback;
     }
@@ -38,11 +38,11 @@ public sealed class DefaultStreamWState<T,Y>(T dataForNamed) : BaseNamedStreamWS
     {
         if(isDispose) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQNotifyStreamDataForNamed","Already disposed of");
+            throw new LocalException(this,EnumGuilty.developer,"DefaultStreamWStateQQNotifyStreamDataForNamed","Already disposed of");
         }
         if(callback == null) 
         {
-            throw new LocalException(this,EnumGuilty.Developer,"DefaultStreamWStateQQNotifyStreamDataForNamed","Stream has no listener");
+            throw new LocalException(this,EnumGuilty.developer,"DefaultStreamWStateQQNotifyStreamDataForNamed","Stream has no listener");
         }
         callback(dataForNamed);
     }

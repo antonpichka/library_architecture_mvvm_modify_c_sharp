@@ -11,6 +11,6 @@ public class Ints(int field) : BaseModel($"{field}")
 
     public override string ToString()
     {
-        return $"Ints(field: {field}";
+        return $"Ints(field: {field})";
     }
 }

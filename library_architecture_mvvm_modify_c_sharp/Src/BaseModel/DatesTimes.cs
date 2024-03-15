@@ -11,6 +11,6 @@ public class DatesTimes(DateTime dateTime) : BaseModel($"{dateTime}")
 
     public override string ToString()
     {
-        return $"DatesTimes(dateTime: {dateTime}";
+        return $"DatesTimes(dateTime: {dateTime})";
     }
 }

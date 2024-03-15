@@ -56,7 +56,7 @@ public sealed class TempCacheService
     {
         if(!tempCache.TryGetValue(keyTempCache, out dynamic? value)) 
         {
-            throw new LocalException(this, EnumGuilty.Developer, keyTempCache, "No exists key");
+            throw new LocalException(this, EnumGuilty.developer, keyTempCache, "No exists key");
         }
         return value;
     }
