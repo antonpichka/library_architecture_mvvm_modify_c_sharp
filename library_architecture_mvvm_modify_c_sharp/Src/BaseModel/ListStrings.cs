@@ -14,6 +14,11 @@ public class ListStrings<T>(List<T> listModel) : BaseListModel<T>(listModel) whe
 
     public override string ToString()
     {
-        return $"ListStrings(listModel: {listModel}";
+        string strListModel = "\n";
+        foreach(T model in listModel) 
+        {
+            strListModel += $"{model},\n";
+        }
+        return $"ListStrings(listModel: [{strListModel}])";
     }
 }

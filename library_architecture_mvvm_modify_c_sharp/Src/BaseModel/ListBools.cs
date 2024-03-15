@@ -14,6 +14,11 @@ public class ListBools<T>(List<T> listModel) : BaseListModel<T>(listModel) where
 
     public override string ToString()
     {
-        return $"ListBools(listModel: {listModel}";
+        string strListModel = "\n";
+        foreach(T model in listModel) 
+        {
+            strListModel += $"{model},\n";
+        }
+        return $"ListBools(listModel: [{strListModel}])";
     }
 }

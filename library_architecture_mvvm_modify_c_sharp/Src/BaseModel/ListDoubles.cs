@@ -14,6 +14,11 @@ public class ListDoubles<T>(List<T> listModel) : BaseListModel<T>(listModel) whe
 
     public override string ToString()
     {
-        return $"ListDoubles(listModel: {listModel}";
+        string strListModel = "\n";
+        foreach(T model in listModel) 
+        {
+            strListModel += $"{model},\n";
+        }
+        return $"ListDoubles(listModel: [{strListModel}])";
     }
 }

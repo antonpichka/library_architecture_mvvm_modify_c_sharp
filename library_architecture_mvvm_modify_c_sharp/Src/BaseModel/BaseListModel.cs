@@ -29,8 +29,8 @@ public abstract class BaseListModel<T>(List<T> listModel) where T : BaseModel
 
     public void UpdateFromNewModelParameterListModel(T newModel) 
     {
-        var first = listModel.First(itemModel => itemModel.uniqueId == newModel.uniqueId);
-        first = newModel;
+        var findIndex = listModel.FindIndex(itemModel => itemModel.uniqueId == newModel.uniqueId);
+        listModel[findIndex] = newModel;
     }
 
     public void DeleteFromUniqueIdByModelParameterListModel(string uniqueIdByModel) 
@@ -48,8 +48,8 @@ public abstract class BaseListModel<T>(List<T> listModel) where T : BaseModel
     {
         foreach(T newItemModel in newListModel) 
         {
-            var first = listModel.First(itemModel => itemModel.uniqueId == newItemModel.uniqueId);
-            first = newItemModel;
+            var findIndex = listModel.FindIndex(itemModel => itemModel.uniqueId == newItemModel.uniqueId);
+            listModel[findIndex] = newItemModel;
         }
     }
 
