@@ -6,7 +6,7 @@
 
 | Package                                                                                                               | Nuget                                                                                                                                            |
 |-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| [library_architecture_mvvm_modify_c_sharp](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/tree/main/library_architecture_mvvm_modify_c_sharp) | Coming Soon |
+| [library_architecture_mvvm_modify_c_sharp](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/tree/main/library_architecture_mvvm_modify_c_sharp) | [NuGet](https://www.nuget.org/packages/library_architecture_mvvm_modify_c_sharp) |
 
 ## Windows
 
@@ -20,6 +20,10 @@
 - - Start-Process -FilePath "build_lamm_c_sharp_bat.bat" -WindowStyle Hidden
 - - taskkill /f /im dotnet.exe
 - - taskkill /f /im cmd.exe
+- Commands cmd (Only For NuGet):
+- - dotnet pack
+- Commands PowerShell (Only For NuGet):
+- - dotnet pack
 
 ### Build/Run "example"
 

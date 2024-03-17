@@ -4,7 +4,25 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>library_architecture_mvvm_modify_c_sharp</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Anton Pichka</Authors>
+    <Description>MVVM Modify for C# but you can also port to another language</Description>
+    <Copyright>Copyright © 2024 Anton Pichka</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+    1.0.0:
+    - Release
+    </PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="LICENSE" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <Target Name="CleanAndDelete" AfterTargets="Clean">
     <RemoveDir Directories="$(BaseIntermediateOutputPath)$(Configuration)" />
