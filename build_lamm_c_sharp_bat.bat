@@ -12,3 +12,4 @@ for /r "%source%" %%F in (*) do (
 rd /s /q build\Src
 cd build
 dotnet build
+pause

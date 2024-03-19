@@ -17,12 +17,10 @@
 - - taskkill /f /im dotnet.exe
 - - taskkill /f /im cmd.exe
 - Commands PowerShell:
-- - Start-Process -FilePath "build_lamm_c_sharp_bat.bat" -WindowStyle Hidden
+- - Start-Process -FilePath "build_lamm_c_sharp_bat.bat"
 - - taskkill /f /im dotnet.exe
 - - taskkill /f /im cmd.exe
-- Commands cmd (Only For NuGet):
-- - dotnet pack
-- Commands PowerShell (Only For NuGet):
+- Commands cmd/PowerShell (Only For NuGet):
 - - dotnet pack
 
 ### Build/Run "example"
