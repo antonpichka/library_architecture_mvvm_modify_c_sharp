@@ -5,12 +5,12 @@ public static class Utility
     public static void DebugPrint(string text)
     {
         Console.WriteLine(text);
-        Console.ResetColor();
     }
 
     public static void DebugPrintException(string text)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         DebugPrint(text);
+        Console.ResetColor();
     }
 }

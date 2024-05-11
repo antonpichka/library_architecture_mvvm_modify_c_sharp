@@ -20,12 +20,9 @@
 - - Start-Process -FilePath "build_lamm_c_sharp_bat.bat"
 - - taskkill /f /im dotnet.exe
 - - taskkill /f /im cmd.exe
-- Commands cmd/PowerShell (Only For NuGet):
+
+### Upload to "nuget.org"
+
+- Commands cmd/PowerShell:
+- - cd library_architecture_mvvm_modify_c_sharp
 - - dotnet pack
-
-### Build/Run "example"
-
-- Commands cmd\PowerShell:
-- - cd example
-- - dotnet build
-- - dotnet run

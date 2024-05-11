@@ -12,7 +12,7 @@
 
 ## Example
 
-- [Console project](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/blob/main/example/Example.cs)
+- [Small project](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/blob/main/example/Example.cs)
 
 ## Template For LAMM
 

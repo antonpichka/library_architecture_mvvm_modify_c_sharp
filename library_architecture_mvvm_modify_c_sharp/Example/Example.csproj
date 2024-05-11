@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="C:\Developer\Projects\library_architecture_mvvm_modify_c_sharp\SomeOtherOutputPath\Debug\net8.0\library_architecture_mvvm_modify_c_sharp.dll" />
+    <Reference Include="C:\Developer\Projects\library_architecture_mvvm_modify_c_sharp\output\Debug\net8.0\library_architecture_mvvm_modify_c_sharp.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

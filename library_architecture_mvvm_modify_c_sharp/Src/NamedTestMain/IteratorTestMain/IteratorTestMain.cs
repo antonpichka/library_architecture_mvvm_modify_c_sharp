@@ -89,38 +89,38 @@ public class IteratorTestMain
         listUserBalance.DeleteFromUniqueIdByModelParameterListModel("Mitsuya");
         listUserBalance.SortingFromModelWNamedWNamedWNamedIteratorParameterListModel(userBalanceWOrderByDescWMoneyIterator);
         Utility.DebugPrint($"After(Three): {listUserBalance}"); // 15, 7, 3, 1, -1
-        // EXPECTED OUTPUT:
-        //
-        // Before: ListUserBalance(listModel: [       
-        // UserBalance(username: Jone, money: 3),     
-        // UserBalance(username: Freddy, money: 1),   
-        // UserBalance(username: Mitsuya, money: 10), 
-        // UserBalance(username: Duramichi, money: 5),
-        // UserBalance(username: Hook, money: 7),     
-        // UserBalance(username: Sexy, money: -1),    
-        // ])
-        // After: ListUserBalance(listModel: [        
-        // UserBalance(username: Mitsuya, money: 10), 
-        // UserBalance(username: Hook, money: 7),     
-        // UserBalance(username: Duramichi, money: 5),
-        // UserBalance(username: Jone, money: 3),
-        // UserBalance(username: Freddy, money: 1),
-        // UserBalance(username: Sexy, money: -1),
-        // ])
-        // After(Two): ListUserBalance(listModel: [
-        // UserBalance(username: Duramichi, money: 15),
-        // UserBalance(username: Mitsuya, money: 10),
-        // UserBalance(username: Hook, money: 7),
-        // UserBalance(username: Jone, money: 3),
-        // UserBalance(username: Freddy, money: 1),
-        // UserBalance(username: Sexy, money: -1),
-        // ])
-        // After(Three): ListUserBalance(listModel: [
-        // UserBalance(username: Duramichi, money: 15),
-        // UserBalance(username: Hook, money: 7),
-        // UserBalance(username: Jone, money: 3),
-        // UserBalance(username: Freddy, money: 1),
-        // UserBalance(username: Sexy, money: -1),
-        // ])
     }
 }
+// EXPECTED OUTPUT:
+//
+// Before: ListUserBalance(listModel: [       
+// UserBalance(username: Jone, money: 3),     
+// UserBalance(username: Freddy, money: 1),   
+// UserBalance(username: Mitsuya, money: 10), 
+// UserBalance(username: Duramichi, money: 5),
+// UserBalance(username: Hook, money: 7),        
+// UserBalance(username: Sexy, money: -1),    
+// ])
+// After: ListUserBalance(listModel: [        
+// UserBalance(username: Mitsuya, money: 10), 
+// UserBalance(username: Hook, money: 7),     
+// UserBalance(username: Duramichi, money: 5),
+// UserBalance(username: Jone, money: 3),
+// UserBalance(username: Freddy, money: 1),
+// UserBalance(username: Sexy, money: -1),
+// ])
+// After(Two): ListUserBalance(listModel: [
+// UserBalance(username: Duramichi, money: 15),
+// UserBalance(username: Mitsuya, money: 10),
+// UserBalance(username: Hook, money: 7),
+// UserBalance(username: Jone, money: 3),
+// UserBalance(username: Freddy, money: 1),
+// UserBalance(username: Sexy, money: -1),
+// ])
+// After(Three): ListUserBalance(listModel: [
+// UserBalance(username: Duramichi, money: 15),
+// UserBalance(username: Hook, money: 7),
+// UserBalance(username: Jone, money: 3),
+// UserBalance(username: Freddy, money: 1),
+// UserBalance(username: Sexy, money: -1),
+// ])

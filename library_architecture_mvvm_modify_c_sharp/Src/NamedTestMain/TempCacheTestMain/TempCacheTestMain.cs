@@ -24,11 +24,11 @@ public class TempCacheTestMain
         tempCacheService.ListenStreamFromKeyTempCacheAndCallbackParameterOne(key,(data) => {
             Utility.DebugPrint($"ListenThree: {data}");
         });
-        // EXPECTED OUTPUT:
-        //
-        // GetFromKeyTempCacheParameterTempCache: One
-        // Listen: Two
-        // Listen: Three
-        // ListenTwo: Three
     }
 }
+// EXPECTED OUTPUT:
+//
+// GetFromKeyTempCacheParameterTempCache: One
+// Listen: Two
+// Listen: Three
+// ListenTwo: Three

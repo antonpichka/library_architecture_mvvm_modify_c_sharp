@@ -2,14 +2,11 @@
 
 set "project=library_architecture_mvvm_modify_c_sharp"
 rd /s /q build
-rd /s /q %systemdrive%\$Recycle.bin
-Xcopy %project%\* build\ /S /E
-set "source=build\."
-set "destination=build\."
-for /r "%source%" %%F in (*) do (
-    copy "%%F" "%destination%"
-)
-rd /s /q build\Src
+rd /s /q intermediate_output
+rd /s /q output
+robocopy %project% build /S
 cd build
+rd /s /q Example
+rd /s /q Src\NamedTestMain
 dotnet build
-pause
+PAUSE

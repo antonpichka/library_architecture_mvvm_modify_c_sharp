@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>library_architecture_mvvm_modify_c_sharp</PackageId>
-    <Version>1.0.1</Version>
+    <Version>2.0.0</Version>
     <Authors>Anton Pichka</Authors>
     <Description>MVVM Modify for C# but you can also port to another language</Description>
     <Copyright>Copyright © 2024 Anton Pichka</Copyright>
@@ -14,6 +14,8 @@
     <RepositoryUrl>https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+    2.0.0:
+    - 'NamedViewModel' has become simplified, now there is design and logic, since providing the state of the object and the stream gave 'BaseNamedStreamWState' and only providing the state of the object 'BaseNamedState', then the 'NamedViewModel' itself did nothing, only separated test and release, which allowed to simulate obtaining data and obtaining real data to make it easier to test design, queries, etc. But 'RWTMode' was added which now performs this function in a simplified way, don't even need to writer a class, let alone create files
     1.0.1:
     - Fix: To classes "BaseException" parameter constructor "thisClass" where method "thisClass.GetType" fix "thisClass.GetType()"  
     1.0.0:
