@@ -24,5 +24,5 @@
 ### Upload to "nuget.org"
 
 - Commands cmd/PowerShell:
-- - cd library_architecture_mvvm_modify_c_sharp
+- - cd build
 - - dotnet pack

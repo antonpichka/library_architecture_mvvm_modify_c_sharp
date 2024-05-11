@@ -2,8 +2,8 @@
 [Dd]ebug/
 [Rr]elease/
 build/
-SomeOtherIntermediateOutputPath/
-SomeOtherOutputPath/
+intermediate_output/
+output/
 *.slo
 *.lo
 *.o
