@@ -21,7 +21,7 @@ public class UserBalance(string username, int money) : BaseModel(username)
 public class ListUserBalance<T>(List<T> listModel) : BaseListModel<T>(listModel) where T : UserBalance
 {
     public override ListUserBalance<T> GetClone()
-    {
+    {   
         List<T?> newListModel = [];
         foreach(T model in listModel)
         {
@@ -43,13 +43,12 @@ public class ListUserBalance<T>(List<T> listModel) : BaseListModel<T>(listModel)
 
 public class UserBalanceWOrderByDescWMoneyIterator<T> : BaseModelWNamedWNamedWNamedIterator<T> where T : UserBalance 
 {
-    public override T Current()
+    protected override CurrentModelWIndex<T> CurrentModelWIndex()
     {
         T? clone = listModelIterator[0].GetClone() as T;
         if(listModelIterator.Count <= 1) 
         {
-            listModelIterator.RemoveAt(0);
-            return clone!;
+            return new CurrentModelWIndex<T>(clone!,0);
         }
         int indexRemove = 0;
         for(int i = 1; i < listModelIterator.Count; i++) 
@@ -62,16 +61,16 @@ public class UserBalanceWOrderByDescWMoneyIterator<T> : BaseModelWNamedWNamedWNa
                 continue;
             }
         }
-        listModelIterator.RemoveAt(indexRemove);
-        return clone!;
+        return new CurrentModelWIndex<T>(clone!,indexRemove);
     }
 }
 
 public class IteratorTestMain
 {
-    public static void Main(string[] args) 
+    public static void Main() 
     {
-        var listUserBalance = new ListUserBalance<UserBalance>([
+        var listUserBalance = new ListUserBalance<UserBalance>([]);
+        listUserBalance.InsertListFromNewListModelParameterListModel([
             new UserBalance("Jone", 3),
             new UserBalance("Freddy", 1),
             new UserBalance("Mitsuya", 10),

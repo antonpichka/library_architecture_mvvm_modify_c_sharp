@@ -5,6 +5,8 @@ public abstract class BaseListModel<T>(List<T> listModel) where T : BaseModel
     public readonly List<T> listModel = listModel;
 
     public abstract BaseListModel<T> GetClone();
+
+    public abstract override string ToString();
     
     public void SortingFromModelWNamedWNamedWNamedIteratorParameterListModel(BaseModelWNamedWNamedWNamedIterator<T> modelWNamedWNamedWNamedIterator)
     {

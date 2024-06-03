@@ -7,4 +7,6 @@ public abstract class BaseDataForNamed<T>(bool isLoading) where T : Enum
     public ExceptionController exceptionController = ExceptionController.Success();
 
     public abstract T GetEnumDataForNamed();
+
+    public abstract override string ToString();
 }

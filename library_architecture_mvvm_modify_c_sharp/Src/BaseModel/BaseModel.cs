@@ -5,4 +5,6 @@ public abstract class BaseModel(string uniqueId)
     public readonly string uniqueId = uniqueId;
 
     public abstract BaseModel GetClone();
+
+    public abstract override string ToString();
 }

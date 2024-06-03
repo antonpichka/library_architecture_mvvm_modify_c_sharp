@@ -16,14 +16,14 @@ public sealed class TempCacheService
 
     public static void ClearTempCacheParameterInstance()
     {
-        var localTempCache = instance.tempCache;
-        localTempCache.Clear();
+        var tempCache = instance.tempCache;
+        tempCache.Clear();
     }
 
     public static void CloseStreamFromKeyTempCacheParameterInstance(string keyTempCache)
     {
-        var localTempCacheWListAction = instance.tempCacheWListAction;
-        if(!localTempCacheWListAction.TryGetValue(keyTempCache, out List<Action<dynamic>>? listAction)) 
+        var tempCacheWListAction = instance.tempCacheWListAction;
+        if(!tempCacheWListAction.TryGetValue(keyTempCache, out List<Action<dynamic>>? listAction)) 
         {
             return;
         }
@@ -32,10 +32,10 @@ public sealed class TempCacheService
 
     public static void CloseStreamFromListKeyTempCacheParameterInstance(List<string> listKeyTempCache)
     {
-        var localTempCacheWListAction = instance.tempCacheWListAction;
+        var tempCacheWListAction = instance.tempCacheWListAction;
         foreach(string itemKeyTempCache in listKeyTempCache) 
         {
-            if(!localTempCacheWListAction.TryGetValue(itemKeyTempCache, out List<Action<dynamic>>? listAction)) 
+            if(!tempCacheWListAction.TryGetValue(itemKeyTempCache, out List<Action<dynamic>>? listAction)) 
             {
                 return;
             }
@@ -45,8 +45,8 @@ public sealed class TempCacheService
 
     public static void CloseStreamsParameterInstance() 
     {
-        var localTempCacheWListAction = instance.tempCacheWListAction;
-        foreach(List<Action<dynamic>> itemValues in localTempCacheWListAction.Values) 
+        var tempCacheWListAction = instance.tempCacheWListAction;
+        foreach(List<Action<dynamic>> itemValues in tempCacheWListAction.Values) 
         {
             itemValues.Clear();
         }
@@ -70,7 +70,6 @@ public sealed class TempCacheService
             tempCacheWListAction[keyTempCache].Add(callback);
             return;
         }
-
         listAction.Add(callback);
     }
 

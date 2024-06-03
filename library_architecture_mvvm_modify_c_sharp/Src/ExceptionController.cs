@@ -19,6 +19,13 @@ public sealed class ExceptionController
         return new ExceptionController(exception);
     }
 
+    public override string ToString() {
+        if(exception == null) {
+            return "ExceptionController(exception: null)";
+        }
+        return "ExceptionController(exception: " + exception + ")";
+    }
+
     public string GetKeyParameterException()
     {
         return exception?.key ?? "";

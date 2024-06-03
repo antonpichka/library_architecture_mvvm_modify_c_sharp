@@ -4,13 +4,13 @@ namespace TempCacheTestMain;
 
 public class TempCacheTestMain
 {
-    public static async Task Main(string[] args) 
+    public static async Task Main() 
     {
         var tempCacheService = TempCacheService.instance;
         var key = "key";
         tempCacheService.UpdateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne(key, "One");
-        var getFromKeyTempCacheParameterTempCache = tempCacheService.GetFromKeyTempCacheParameterTempCache(key);
-        Utility.DebugPrint($"GetFromKeyTempCacheParameterTempCache: {getFromKeyTempCacheParameterTempCache}");
+        var fromKeyTempCacheParameterTempCache = tempCacheService.GetFromKeyTempCacheParameterTempCache(key);
+        Utility.DebugPrint($"FromKeyTempCacheParameterTempCache: {fromKeyTempCacheParameterTempCache}");
         tempCacheService.ListenStreamFromKeyTempCacheAndCallbackParameterOne(key,(data) => {
             Utility.DebugPrint($"Listen: {data}");
         });
@@ -28,7 +28,7 @@ public class TempCacheTestMain
 }
 // EXPECTED OUTPUT:
 //
-// GetFromKeyTempCacheParameterTempCache: One
+// FromKeyTempCacheParameterTempCache: One
 // Listen: Two
 // Listen: Three
 // ListenTwo: Three

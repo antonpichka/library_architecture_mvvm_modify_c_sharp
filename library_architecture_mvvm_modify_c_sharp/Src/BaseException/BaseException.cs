@@ -11,4 +11,6 @@ public abstract class BaseException : Exception
         Utility.DebugPrintException($"WhereHappenedException(Class) --> {thisClass.GetType()}\n NameException(Class) --> {exceptionClass}\n ToString() --> {ToString()}");
         Utility.DebugPrintException("\n===end_to_trace_exception===\n");
     }
+
+    public abstract override string ToString();
 }

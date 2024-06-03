@@ -75,7 +75,7 @@ public sealed class HttpClientService
         }
         httpClient = new HttpClient
         {
-            Timeout = TimeSpan.FromSeconds(10)
+            Timeout = TimeSpan.FromSeconds(5)
         };
         return httpClient;
     }   
@@ -128,8 +128,13 @@ public sealed class DataForMainVM(bool isLoading, IPAddress iPAddress) : BaseDat
         }
         return EnumDataForMainVM.success;
     }
-}
 
+    public override string ToString()
+    {
+        return $"DataForMainVM(isLoading: {isLoading}, exceptionController: {exceptionController}, iPAddress: {iPAddress})";
+    }
+}
+    
 public sealed class MainVM 
 {
     // OperationEEModel(EEWhereNamed)[EEFromNamed]EEParameterNamedService
@@ -143,51 +148,51 @@ public sealed class MainVM
     public MainVM() 
     {
         namedStreamWState = new DefaultStreamWState<DataForMainVM,EnumDataForMainVM>(new DataForMainVM(true,new IPAddress("")));
+        Func<Task<string>> initReleaseCallback = async () =>
+        {
+            var getIPAddressWhereJsonipAPIParameterHttpClientService = await getEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService.GetIPAddressWhereJsonipAPIParameterHttpClientService();
+            if(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController.IsWhereNotEqualsNullParameterException()) 
+            {
+                return FirstQQInitReleaseCallbackQQGetIPAddressWhereJsonipAPIParameterHttpClientService(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController);
+            }
+            namedStreamWState.GetDataForNamed().isLoading = false;
+            namedStreamWState.GetDataForNamed().iPAddress = getIPAddressWhereJsonipAPIParameterHttpClientService.parameter!.GetClone();
+            return KeysSuccessUtility.sUCCESS;
+        };
+        Func<Task<string>> initTestCallback = async () =>
+        {
+            // Simulation get "IPAddress"
+            var iPAddress = new IPAddress("121.121.12.12");
+            await Task.Delay(1000);
+            namedStreamWState.GetDataForNamed().isLoading = false;
+            namedStreamWState.GetDataForNamed().iPAddress = iPAddress.GetClone();
+            return KeysSuccessUtility.sUCCESS;
+        };
         rwtMode = new RWTMode(
             EnumRWTMode.release,
             [
-                new NamedCallback("init", (Func<Task<string>>)(async () =>
-                {
-                    var getIPAddressWhereJsonipAPIParameterHttpClientService = await getEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService.GetIPAddressWhereJsonipAPIParameterHttpClientService();
-                    if(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController.IsWhereNotEqualsNullParameterException()) 
-                    {
-                        return FirstQQInitQQGetIPAddressWhereJsonipAPIParameterHttpClientService(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController);
-                    }
-                    namedStreamWState.GetDataForNamed().isLoading = false;
-                    namedStreamWState.GetDataForNamed().iPAddress = getIPAddressWhereJsonipAPIParameterHttpClientService.parameter!.GetClone();
-                    return KeysSuccessUtility.sUCCESS;
-                })),
+                new NamedCallback("init", initReleaseCallback),
             ],
             [
-                new NamedCallback("init", (Func<Task<string>>)(async () =>
-                {
-                    // Simulation get "IPAddress"
-                    var iPAddress = new IPAddress("121.121.12.12");
-                    await Task.Delay(1000);
-                    namedStreamWState.GetDataForNamed().isLoading = false;
-                    namedStreamWState.GetDataForNamed().iPAddress = iPAddress.GetClone();
-                    return KeysSuccessUtility.sUCCESS;
-                })),
+                new NamedCallback("init", initTestCallback),
             ]
         );
-        Init();
     }
 
-    // Override
-    public void OnClosed() 
+    public async Task Init() 
     {
-        namedStreamWState.Dispose();
-    }
-
-    private async void Init() 
-    {
-        namedStreamWState.ListenStreamDataForNamedFromCallback((data) =>
+        namedStreamWState.ListenStreamDataForNamedFromCallback((_data) =>
         {
             Build();
         });
         var result = await rwtMode.GetNamedCallbackFromName("init").callback();
         Utility.DebugPrint($"MainVM: {result}");
         namedStreamWState.NotifyStreamDataForNamed();
+    }
+
+    public void Dispose() 
+    {
+        namedStreamWState.Dispose();
     }
 
     private void Build() 
@@ -208,8 +213,8 @@ public sealed class MainVM
                 break;            
         }
     }
-
-    private string FirstQQInitQQGetIPAddressWhereJsonipAPIParameterHttpClientService(ExceptionController exceptionController)
+    
+    private string FirstQQInitReleaseCallbackQQGetIPAddressWhereJsonipAPIParameterHttpClientService(ExceptionController exceptionController)
     {
         namedStreamWState.GetDataForNamed().isLoading = false;
         namedStreamWState.GetDataForNamed().exceptionController = exceptionController;
@@ -222,8 +227,8 @@ public class Example
     public static async Task Main()
     {
         var mainVM = new MainVM();
-        await Task.Delay(10000);
-        mainVM.OnClosed();
+        await mainVM.Init();
+        mainVM.Dispose();
     }
 }
 // EXPECTED OUTPUT:
