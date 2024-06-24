@@ -9,6 +9,7 @@
 - [Example](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/tree/main/library_architecture_mvvm_modify_c_sharp#example)
 - [Template For LAMM](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/tree/main/library_architecture_mvvm_modify_c_sharp#template-for-lamm)
 - [Documentation](https://github.com/antonpichka/library_architecture_mvvm_modify/tree/main/package#documentation)
+- [Documentation Explanation](https://github.com/antonpichka/library_architecture_mvvm_modify/tree/main/package#documentation-explanation)
 
 ## Example
 

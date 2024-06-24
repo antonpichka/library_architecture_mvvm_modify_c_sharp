@@ -3,22 +3,17 @@ using Newtonsoft.Json;
 
 namespace Example;
 
+public static class ReadyDataUtility 
+{
+    public const string unknown = "unknown";
+    public const string success = "success";
+    public const string iPAPI = "https://jsonip.com/";
+}
+
 public static class KeysHttpClientServiceUtility 
 {
     /* IPAddress */
     public const string iPAddressQQIp = "ip";
-}
-
-public static class KeysExceptionUtility 
-{
-    /* UNKNOWN */
-    public const string uNKNOWN = "uNKNOWN";
-}
-
-public static class KeysSuccessUtility 
-{
-    /* SUCCESS */
-    public const string sUCCESS = "sUCCESS";
 }
 
 public class IPAddress(string ip) : BaseModel(ip)
@@ -81,30 +76,62 @@ public sealed class HttpClientService
     }   
 }
 
-public class GetEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService<T,Y> where T: IPAddress where Y: ListIPAddress<T> 
+public class IPAddressRepository<T, Y> : BaseModelRepository<T, Y> where T : IPAddress where Y : ListIPAddress<T>
 {
     protected readonly HttpClientService httpClientService = HttpClientService.instance;
+    private readonly Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWReleaseCallback;
+    private readonly Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWTestCallback;
 
-    public async Task<Result<T>> GetIPAddressWhereJsonipAPIParameterHttpClientService() 
+    public IPAddressRepository(EnumRWTMode enumRWTMode) : base(enumRWTMode)
     {
-        try 
+        getIPAddressParameterHttpClientServiceWReleaseCallback = async () =>
         {
-            var response = await httpClientService.GetParameterHttpClient()!.GetAsync("https://jsonip.com/");
-            if(!response.IsSuccessStatusCode)
+            try {
+                var response = await httpClientService.GetParameterHttpClient()!.GetAsync(ReadyDataUtility.iPAPI);
+                if(!response.IsSuccessStatusCode)
+                {
+                    throw NetworkException.FromKeyAndStatusCode(this,response.StatusCode.ToString(),(int)response.StatusCode);
+                }
+                var jsonToString = await response.Content.ReadAsStringAsync();
+                var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonToString ?? "") ?? [];
+                return Result<T>.Success(GetBaseModelFromMapAndListKeys(json,[KeysHttpClientServiceUtility.iPAddressQQIp]));
+            } catch(NetworkException networkException)
             {
-                throw NetworkException.FromKeyAndStatusCode(this,response.StatusCode.ToString(),(int)response.StatusCode);
+                return Result<T>.Exception(networkException);
+            } catch(Exception e)
+            {
+                return Result<T>.Exception(new LocalException(this,EnumGuilty.device,ReadyDataUtility.unknown,e.ToString()));
             }
-            var jsonToString = await response.Content.ReadAsStringAsync();
-            var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonToString ?? "") ?? [];
-            var iPAddress = new IPAddress(json[KeysHttpClientServiceUtility.iPAddressQQIp] ?? "") as T;
-            return Result<T>.Success(iPAddress!);
-        } catch(NetworkException networkException)
+        };
+        getIPAddressParameterHttpClientServiceWTestCallback = async () => 
         {
-            return Result<T>.Exception(networkException);
-        } catch(Exception e)
+            await Task.Delay(1000);
+            return Result<T>.Success(GetBaseModelFromMapAndListKeys(
+                new Dictionary<string, dynamic>()
+                {
+                    {KeysHttpClientServiceUtility.iPAddressQQIp, "121.121.12.12"},
+                },
+                [KeysHttpClientServiceUtility.iPAddressQQIp]));
+        };
+    }
+
+    protected override T GetBaseModelFromMapAndListKeys(Dictionary<string, dynamic> map, List<string> listKeys)
+    {
+        if(listKeys.Count < 1)
         {
-            return Result<T>.Exception(new LocalException(this,EnumGuilty.device,KeysExceptionUtility.uNKNOWN,e.ToString()));
+            return (new IPAddress("") as T)!;
         }
+        return (new IPAddress(map.TryGetValue(listKeys[0], out dynamic? value) ? value : "") as T)!;
+    }
+    
+    protected override Y GetBaseListModelFromListModel(List<T> listModel)
+    {
+        return (new ListIPAddress<T>(listModel) as Y)!;
+    }
+
+    public Task<Result<T>> GetIPAddressParameterHttpClientService() 
+    {
+        return GetModeCallbackFromReleaseCallbackAndTestCallbackParameterEnumRWTMode(getIPAddressParameterHttpClientServiceWReleaseCallback,getIPAddressParameterHttpClientServiceWTestCallback)();
     }
 }
 
@@ -137,46 +164,17 @@ public sealed class DataForMainVM(bool isLoading, IPAddress iPAddress) : BaseDat
     
 public sealed class MainVM 
 {
-    // OperationEEModel(EEWhereNamed)[EEFromNamed]EEParameterNamedService
-    private readonly GetEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService<IPAddress,ListIPAddress<IPAddress>> getEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService = new();
+    // ModelRepository
+    private readonly IPAddressRepository<IPAddress,ListIPAddress<IPAddress>> iPAddressRepository = new(EnumRWTMode.release);
+    
     // NamedUtility
     
-    // Main objects
+    // NamedStreamWState
     private readonly BaseNamedStreamWState<DataForMainVM,EnumDataForMainVM> namedStreamWState;
-    private readonly RWTMode rwtMode;
     
     public MainVM() 
     {
         namedStreamWState = new DefaultStreamWState<DataForMainVM,EnumDataForMainVM>(new DataForMainVM(true,new IPAddress("")));
-        Func<Task<string>> initReleaseCallback = async () =>
-        {
-            var getIPAddressWhereJsonipAPIParameterHttpClientService = await getEEIPAddressEEWhereJsonipAPIEEParameterHttpClientService.GetIPAddressWhereJsonipAPIParameterHttpClientService();
-            if(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController.IsWhereNotEqualsNullParameterException()) 
-            {
-                return FirstQQInitReleaseCallbackQQGetIPAddressWhereJsonipAPIParameterHttpClientService(getIPAddressWhereJsonipAPIParameterHttpClientService.exceptionController);
-            }
-            namedStreamWState.GetDataForNamed().isLoading = false;
-            namedStreamWState.GetDataForNamed().iPAddress = getIPAddressWhereJsonipAPIParameterHttpClientService.parameter!.GetClone();
-            return KeysSuccessUtility.sUCCESS;
-        };
-        Func<Task<string>> initTestCallback = async () =>
-        {
-            // Simulation get "IPAddress"
-            var iPAddress = new IPAddress("121.121.12.12");
-            await Task.Delay(1000);
-            namedStreamWState.GetDataForNamed().isLoading = false;
-            namedStreamWState.GetDataForNamed().iPAddress = iPAddress.GetClone();
-            return KeysSuccessUtility.sUCCESS;
-        };
-        rwtMode = new RWTMode(
-            EnumRWTMode.release,
-            [
-                new NamedCallback("init", initReleaseCallback),
-            ],
-            [
-                new NamedCallback("init", initTestCallback),
-            ]
-        );
     }
 
     public async Task Init() 
@@ -185,8 +183,8 @@ public sealed class MainVM
         {
             Build();
         });
-        var result = await rwtMode.GetNamedCallbackFromName("init").callback();
-        Utility.DebugPrint($"MainVM: {result}");
+        var firstRequest = await FirstRequest();
+        Utility.DebugPrint($"MainVM: {firstRequest}");
         namedStreamWState.NotifyStreamDataForNamed();
     }
 
@@ -213,8 +211,19 @@ public sealed class MainVM
                 break;            
         }
     }
+
+    private async Task<string> FirstRequest() {
+        var getIPAddressParameterHttpClientService = await iPAddressRepository.GetIPAddressParameterHttpClientService();
+        if(getIPAddressParameterHttpClientService.exceptionController.IsWhereNotEqualsNullParameterException()) 
+        {
+            return FirstQQFirstRequestQQGetIPAddressParameterHttpClientService(getIPAddressParameterHttpClientService.exceptionController);
+        }
+        namedStreamWState.GetDataForNamed().isLoading = false;
+        namedStreamWState.GetDataForNamed().iPAddress = getIPAddressParameterHttpClientService.parameter!.GetClone();
+        return ReadyDataUtility.success;
+    }
     
-    private string FirstQQInitReleaseCallbackQQGetIPAddressWhereJsonipAPIParameterHttpClientService(ExceptionController exceptionController)
+    private string FirstQQFirstRequestQQGetIPAddressParameterHttpClientService(ExceptionController exceptionController)
     {
         namedStreamWState.GetDataForNamed().isLoading = false;
         namedStreamWState.GetDataForNamed().exceptionController = exceptionController;
@@ -233,7 +242,7 @@ public class Example
 }
 // EXPECTED OUTPUT:
 //
-// MainVM: sUCCESS
+// MainVM: success
 // Build: Success(IPAddress(ip: ${your_ip}))
 
 /// OR

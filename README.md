@@ -4,7 +4,7 @@
 
 --- 
 
-| Package                                                                                                               | Nuget                                                                                                                                            |
+| Package                                                                                                               | NuGet                                                                                                                                            |
 |-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | [library_architecture_mvvm_modify_c_sharp](https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp/tree/main/library_architecture_mvvm_modify_c_sharp) | [NuGet](https://www.nuget.org/packages/library_architecture_mvvm_modify_c_sharp) |
 
