@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>library_architecture_mvvm_modify_c_sharp</PackageId>
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
     <Authors>Anton Pichka</Authors>
     <Description>MVVM Modify for C# but you can also port to another language</Description>
     <Copyright>Copyright © 2024 Anton Pichka</Copyright>
@@ -14,6 +14,10 @@
     <RepositoryUrl>https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+    3.0.1:
+    - Updated 'BaseModelRepository'
+    - Updated example
+    - Updated documentation in the 'ModelRepository' section
     3.0.0:
     - Replaced 'OperationEEModel(EEWhereNamed)[EEFromNamed]EEParameterNamedService' with added 'ModelRepository' because inheriting one class is easier than a thousand classes.
     - Replaced the 'RWTMode' design pattern with a stripped-down version in the 'ModelRepository'.

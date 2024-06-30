@@ -3,6 +3,14 @@ using Newtonsoft.Json;
 
 namespace Example;
 
+public static class FactoryObjectUtility
+{
+    /* ModelRepository */
+    public static IPAddressRepository<IPAddress,ListIPAddress<IPAddress>> GetIPAddressRepository(EnumRWTMode enumRWTMode) {
+        return new IPAddressRepository<IPAddress, ListIPAddress<IPAddress>>(enumRWTMode);
+    }
+}
+
 public static class ReadyDataUtility 
 {
     public const string unknown = "unknown";
@@ -79,11 +87,12 @@ public sealed class HttpClientService
 public class IPAddressRepository<T, Y> : BaseModelRepository<T, Y> where T : IPAddress where Y : ListIPAddress<T>
 {
     protected readonly HttpClientService httpClientService = HttpClientService.instance;
-    private readonly Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWReleaseCallback;
-    private readonly Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWTestCallback;
+    protected Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWReleaseCallback;
+    protected Func<Task<Result<T>>> getIPAddressParameterHttpClientServiceWTestCallback;
 
-    public IPAddressRepository(EnumRWTMode enumRWTMode) : base(enumRWTMode)
+    public IPAddressRepository(EnumRWTMode enumRWTModeFirst) : base()
     {
+        enumRWTMode = enumRWTModeFirst;
         getIPAddressParameterHttpClientServiceWReleaseCallback = async () =>
         {
             try {
@@ -94,7 +103,9 @@ public class IPAddressRepository<T, Y> : BaseModelRepository<T, Y> where T : IPA
                 }
                 var jsonToString = await response.Content.ReadAsStringAsync();
                 var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonToString ?? "") ?? [];
-                return Result<T>.Success(GetBaseModelFromMapAndListKeys(json,[KeysHttpClientServiceUtility.iPAddressQQIp]));
+                return Result<T>.Success(GetBaseModelFromMapAndListKeys(
+                    json,
+                    GetIPAddressParameterHttpClientServiceWListKeys()));
             } catch(NetworkException networkException)
             {
                 return Result<T>.Exception(networkException);
@@ -111,17 +122,14 @@ public class IPAddressRepository<T, Y> : BaseModelRepository<T, Y> where T : IPA
                 {
                     {KeysHttpClientServiceUtility.iPAddressQQIp, "121.121.12.12"},
                 },
-                [KeysHttpClientServiceUtility.iPAddressQQIp]));
+                GetIPAddressParameterHttpClientServiceWListKeys()));
         };
     }
 
     protected override T GetBaseModelFromMapAndListKeys(Dictionary<string, dynamic> map, List<string> listKeys)
     {
-        if(listKeys.Count < 1)
-        {
-            return (new IPAddress("") as T)!;
-        }
-        return (new IPAddress(map.TryGetValue(listKeys[0], out dynamic? value) ? value : "") as T)!;
+        return (new IPAddress(
+            GetSafeValueWhereUsedInMethodGetModelFromMapAndListKeysAndIndexAndDefaultValue(map,listKeys,0,"")) as T)!;
     }
     
     protected override Y GetBaseListModelFromListModel(List<T> listModel)
@@ -132,6 +140,10 @@ public class IPAddressRepository<T, Y> : BaseModelRepository<T, Y> where T : IPA
     public Task<Result<T>> GetIPAddressParameterHttpClientService() 
     {
         return GetModeCallbackFromReleaseCallbackAndTestCallbackParameterEnumRWTMode(getIPAddressParameterHttpClientServiceWReleaseCallback,getIPAddressParameterHttpClientServiceWTestCallback)();
+    }
+
+    protected List<string> GetIPAddressParameterHttpClientServiceWListKeys() {
+        return [KeysHttpClientServiceUtility.iPAddressQQIp]; 
     }
 }
 
@@ -165,7 +177,7 @@ public sealed class DataForMainVM(bool isLoading, IPAddress iPAddress) : BaseDat
 public sealed class MainVM 
 {
     // ModelRepository
-    private readonly IPAddressRepository<IPAddress,ListIPAddress<IPAddress>> iPAddressRepository = new(EnumRWTMode.release);
+    private readonly IPAddressRepository<IPAddress,ListIPAddress<IPAddress>> iPAddressRepository = FactoryObjectUtility.GetIPAddressRepository(EnumRWTMode.release);
     
     // NamedUtility
     
