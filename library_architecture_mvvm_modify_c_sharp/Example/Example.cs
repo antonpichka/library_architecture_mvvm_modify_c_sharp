@@ -9,6 +9,11 @@ public static class FactoryObjectUtility
     public static IPAddressRepository<IPAddress,ListIPAddress<IPAddress>> GetIPAddressRepository(EnumRWTMode enumRWTMode) {
         return new IPAddressRepository<IPAddress, ListIPAddress<IPAddress>>(enumRWTMode);
     }
+
+    /* NamedStreamWState */
+    public static BaseNamedStreamWState<DataForMainVM,EnumDataForMainVM> GetNamedStreamWStateWhereDataWMainVM() {
+        return new DefaultStreamWState<DataForMainVM,EnumDataForMainVM>(new DataForMainVM(true,new IPAddress("")));
+    }
 }
 
 public static class ReadyDataUtility 
@@ -68,18 +73,16 @@ public sealed class HttpClientService
 
     private HttpClient? httpClient;
 
-    private HttpClientService() {}
-
-    public HttpClient? GetParameterHttpClient() 
+    private HttpClientService() 
     {
-        if(httpClient != null) 
-        {
-            return httpClient;
-        }
         httpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(5)
         };
+    }
+
+    public HttpClient? GetParameterHttpClient() 
+    {
         return httpClient;
     }   
 }
@@ -186,7 +189,7 @@ public sealed class MainVM
     
     public MainVM() 
     {
-        namedStreamWState = new DefaultStreamWState<DataForMainVM,EnumDataForMainVM>(new DataForMainVM(true,new IPAddress("")));
+        namedStreamWState = FactoryObjectUtility.GetNamedStreamWStateWhereDataWMainVM();
     }
 
     public async Task Init() 

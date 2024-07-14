@@ -78,7 +78,7 @@ public sealed class TempCacheService
         tempCache[keyTempCache] = value;
     }
 
-    public void UpdateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne(string keyTempCache, dynamic value) 
+    public void UpdateWNotificationFromKeyTempCacheAndValueParameterOne(string keyTempCache, dynamic value) 
     {
         UpdateFromKeyTempCacheAndValueParameterTempCache(keyTempCache,value);
         if(!tempCacheWListAction.TryGetValue(keyTempCache, out List<Action<dynamic>>? listAction)) 

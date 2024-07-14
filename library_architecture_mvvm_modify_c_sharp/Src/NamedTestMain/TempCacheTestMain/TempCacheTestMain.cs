@@ -8,19 +8,19 @@ public class TempCacheTestMain
     {
         var tempCacheService = TempCacheService.instance;
         var key = "key";
-        tempCacheService.UpdateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne(key, "One");
+        tempCacheService.UpdateWNotificationFromKeyTempCacheAndValueParameterOne(key, "One");
         var fromKeyTempCacheParameterTempCache = tempCacheService.GetFromKeyTempCacheParameterTempCache(key);
         Utility.DebugPrint($"FromKeyTempCacheParameterTempCache: {fromKeyTempCacheParameterTempCache}");
         tempCacheService.ListenStreamFromKeyTempCacheAndCallbackParameterOne(key,(data) => {
             Utility.DebugPrint($"Listen: {data}");
         });
         await Task.Delay(1000);
-        tempCacheService.UpdateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne(key, "Two");
+        tempCacheService.UpdateWNotificationFromKeyTempCacheAndValueParameterOne(key, "Two");
         tempCacheService.ListenStreamFromKeyTempCacheAndCallbackParameterOne(key,(data) => {
             Utility.DebugPrint($"ListenTwo: {data}");
         });
         await Task.Delay(1000);
-        tempCacheService.UpdateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne(key, "Three");
+        tempCacheService.UpdateWNotificationFromKeyTempCacheAndValueParameterOne(key, "Three");
         tempCacheService.ListenStreamFromKeyTempCacheAndCallbackParameterOne(key,(data) => {
             Utility.DebugPrint($"ListenThree: {data}");
         });

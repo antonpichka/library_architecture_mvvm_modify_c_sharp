@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>library_architecture_mvvm_modify_c_sharp</PackageId>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <Authors>Anton Pichka</Authors>
     <Description>MVVM Modify for C# but you can also port to another language</Description>
     <Copyright>Copyright © 2024 Anton Pichka</Copyright>
@@ -14,6 +14,9 @@
     <RepositoryUrl>https://github.com/antonpichka/library_architecture_mvvm_modify_c_sharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>
+    3.0.2:
+    - Updated documentation
+    - Rename method in 'TempCacheService' class from 'updateWhereStreamNotificationIsPossibleFromKeyTempCacheAndValueParameterOne' to 'updateWNotificationFromKeyTempCacheAndValueParameterOne'
     3.0.1:
     - Updated 'BaseModelRepository'
     - Updated example
